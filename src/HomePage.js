@@ -14,7 +14,6 @@ export default class HomePage extends React.Component {
         return(
             <div>
                 <NavBar />
-                <div>HOME PAGE!!</div>
                 <img src={acupuncture} alt="acupuncture" className="homePage-mainImage" />
                 <div>
                     <h1 className="homePage-textBlurb-title">COMMUNITY STICK AND POKE</h1>

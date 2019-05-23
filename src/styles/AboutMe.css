@@ -1,0 +1,11 @@
+.aboutMe-container {
+    display: flex;
+}
+.aboutMe-title {
+    text-align: center;
+}
+
+.aboutMe-item {
+    flex: 45%;
+    padding: 16px;
+}
