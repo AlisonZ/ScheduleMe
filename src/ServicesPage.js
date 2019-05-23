@@ -3,7 +3,7 @@ import React from 'react';
 import NavBar from './NavBar';
 import HeaderAndSmText from './HeaderAndSmText';
 import ServicesList from './ServicesList';
-import './styles/ServicesPage.css';
+import './App.css';
 
 export default class ServicesPage extends React.Component {
     render() {
@@ -12,7 +12,7 @@ export default class ServicesPage extends React.Component {
         return(
             <div>
                 <NavBar />
-                <div className="servicesPage-descr">
+                <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                 </div>
                 <ServicesList />

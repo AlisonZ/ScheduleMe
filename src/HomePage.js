@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import ImageLink from './ImageLink';
 import HeaderAndSmText from './HeaderAndSmText';
 import './styles/HomePage.css';
+import './App.css';
 
 import acupuncture from './images/acupuncture.jpg';
 import booking from './images/scheduling-calendar.jpg';
@@ -18,7 +19,7 @@ export default class HomePage extends React.Component {
             <div>
                 <NavBar />
                 <img src={acupuncture} alt="acupuncture" className="homePage-mainImage" />
-                <div>
+                <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                 </div>
                 <ul className="homePage-imageList">

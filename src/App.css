@@ -1,3 +1,7 @@
 .no-list-bullets {
     list-style-type: none;
 }
+
+.header-sm-text-desc {
+    padding: 0 64px;
+}
