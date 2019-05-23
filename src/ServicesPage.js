@@ -2,6 +2,7 @@ import React from 'react';
 
 import NavBar from './NavBar';
 import HeaderAndSmText from './HeaderAndSmText';
+import ServicesList from './ServicesList';
 import './styles/ServicesPage.css';
 
 export default class ServicesPage extends React.Component {
@@ -14,6 +15,7 @@ export default class ServicesPage extends React.Component {
                 <div className="servicesPage-descr">
                     <HeaderAndSmText header={header} text={text} />
                 </div>
+                <ServicesList />
             </div>
         );
     }
