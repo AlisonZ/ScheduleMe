@@ -1,0 +1,24 @@
+.homePage-mainImage {
+    width: 100%;
+    height: 50%;
+}
+
+.homePage-imageList {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+}
+
+.homePage-imageItem {
+    padding: 16px;
+    flex: 0 0 25%;
+}
+
+.homePage-textBlurb-title {
+    text-align: center;
+}
+
+.homePage-imageItem-title {
+    text-align: center;
+}
+
