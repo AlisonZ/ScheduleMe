@@ -5,11 +5,13 @@ import AboutPage from './AboutPage.js';
 import HomePage from './HomePage';
 import ServicesPage from './ServicesPage';
 import SchedulingPage from './SchedulingPage';
+import NavBar from './NavBar';
 
 function App() {
   return (
     <div>
       <Router>
+        <NavBar />
         <Switch>
           <Route exact path="/"><HomePage /></Route>
           <Route path="/about"><AboutPage/></Route>

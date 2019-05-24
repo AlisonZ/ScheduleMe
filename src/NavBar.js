@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import './styles/NavBar.css';
 
@@ -7,10 +8,10 @@ export default class NavBar extends React.Component {
         return(
             <div>
                 <ul className="navBar-list">
-                    <li className="navBar-listItem">Home</li>
-                    <li className="navBar-listItem">About</li>
-                    <li className="navBar-listItem">Services</li>
-                    <li className="navBar-listItem">Book Now</li>
+                    <Link to="/" className="navBar-listItem">Home</Link>
+                    <Link to="/about" className="navBar-listItem">About</Link>
+                    <Link to="/services" className="navBar-listItem">Services</Link>
+                    <Link to="/scheduling" className="navBar-listItem">Book Now</Link>
                 </ul>
 
             </div>

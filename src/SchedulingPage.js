@@ -1,6 +1,5 @@
 import React from 'react';
 
-import NavBar from './NavBar';
 import HeaderAndSmText from './HeaderAndSmText';
 import googleCalendar from './images/google-calendar.png';
 
@@ -14,7 +13,6 @@ export default class SchedulingPage extends React.Component {
         const text = 'Mushrooms co-create prayerformance heartbeat of our ancestors juicy downward dog herbal medicine transformative lavender, harmony biomat. Crystalline astral plane gifting circle Big Sur chia seeds ceremonial-grade, toxins vitamin. Folk remedy positive affirmation light energy, ecofriendly bioneers white sage.';
         return(
             <div>
-                <NavBar/>
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text}/>
                     <center>

@@ -1,0 +1,9 @@
+.services-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.services-list-item {
+    flex-basis: 45%;
+    padding: 8px;
+}

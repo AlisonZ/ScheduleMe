@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import NavBar from './NavBar';
 import './styles/AboutMe.css';
 
 import aboutMePic from './images/about-me-main.jpg';
@@ -10,7 +10,6 @@ export default class AboutPage extends React.Component {
     render() {
         return(
             <div>
-                <NavBar />
                 <h1 className="aboutMe-title">About Me</h1>
                 <div className="aboutMe-container">
                     <div className="aboutMe-item">
