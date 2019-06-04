@@ -26,7 +26,7 @@ export default class SchedulingPage extends React.Component {
                 }).then(function() {
                     // 3. Initialize and make the API request.
                     return gapi.client.request({
-                    'path': 'https://www.googleapis.com/calendar/v3/calendars/alisonkzerbe@gmail.com',
+                    'path': 'https://www.googleapis.com/calendar/v3/calendars/alisonkzerbe@gmail.com/',
                     })
                 }).then(function(response) {
                     console.log(response.result);

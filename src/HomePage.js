@@ -1,9 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import firebase from 'firebase';    
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 import ImageLink from './ImageLink';
 import HeaderAndSmText from './HeaderAndSmText';
-import AboutPage from './AboutPage';
 import './styles/HomePage.css';
 import './App.css';
 
@@ -13,12 +13,24 @@ import aboutMe from './images/about-me-sparkler.jpg';
 import services from './images/services-oil.jpg';
 
 export default class HomePage extends React.Component {
+    // uiConfig = {
+    //     signInFlow: 'popup',
+    //     signInOptions: [
+    //         firebase.auth.EmailAuthProvider.PROVIDER_ID
+    //     ],
+    //     callbacks: {
+    //         signInSuccessWithAuthResult: () => this.props.history.push('/about')
+    //     }
+    // }
+
     render() {
         const header = 'COMMUNITY STICK AND POKE';
         const text = 'Tincture grass-fed full moon infinite blessings, vitamix tofurkey. Authentic self earth surrender yoni daily kegel practice, impermanent mushrooms. Vinyasa Braggs biodiesel, coconut water kefir. Workshop loving kindness ecstatic dance papasan embodied prius alkaline talking stick, open-minded sunset. Nectar as we honor enlightenment, solstice feline acupuncture popcorn with brewers yeast om raw cacao marijuana perineum discovering valuable truths. Namaste.';
         return(
     
                 <div>
+                    {/* <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} /> */}
+
                     <img src={acupuncture} alt="acupuncture" className="homePage-mainImage" />
                     <div className="header-sm-text-desc">
                         <HeaderAndSmText header={header} text={text} />
