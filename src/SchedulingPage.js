@@ -21,7 +21,7 @@ export default class SchedulingPage extends React.Component {
                 console.log('in the load section!!!!');
                 gapi.client.init({
                     'apiKey': 'AIzaSyDPi0QcVPngFZqWWhfYAhWlnaVSjp1P4tw',
-                    'clientId': '415585169793-csd5jepc693i19l4pj2scj7jc7dcdrlt.apps.googleusercontent.com',
+                    'clientId': '663045271040-gn137de7e90hrmmj10atf5afhrhfi59u.apps.googleusercontent.com',
                     'scope': 'https://www.googleapis.com/auth/calendar',
                 }).then(function() {
                     // 3. Initialize and make the API request.
