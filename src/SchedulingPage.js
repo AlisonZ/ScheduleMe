@@ -6,7 +6,6 @@ import googleCalendar from './images/google-calendar.png';
 
 import './styles/SchedulingPage.css';
 import './App.css';
-import { generateKeyPair } from 'crypto';
 
 
 export default class SchedulingPage extends React.Component {
