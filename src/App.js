@@ -18,25 +18,27 @@ export default class App extends React.Component {
   handleItemClick(event, name) {
     if (name === 'sign-in') {
       ApiCalendar.handleAuthClick();
+      console.log('signedinnnn');
     } else if (name === 'sign-out') {
       ApiCalendar.handleSignoutClick();
     }
   }
 
   createEvent() {
-    console.log('in the create event');
-    const eventFromNow = {
-      summary: "Poc Dev From Now",
-      time: 480,
-    };
+    console.log('create callback!!!!!');
+    // console.log('in the create event');
+    // const eventFromNow = {
+    //   summary: "Poc Dev From Now",
+    //   time: 480,
+    // };
 
-    ApiCalendar.createEventFromNow(eventFromNow)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    // ApiCalendar.createEventFromNow(eventFromNow)
+    // .then((result) => {
+    //   console.log(result);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   render() {
@@ -45,26 +47,26 @@ export default class App extends React.Component {
          <div>
           <button
                 onClick={(e) => this.handleItemClick(e, 'sign-in')}
-            >
+                >
               sign-in
             </button>
             <button
                 onClick={(e) => this.handleItemClick(e, 'sign-out')}
-            >
+                >
               sign-out
             </button>
-            <button onClick={this.createEvent}>
-              Create Event!!!
-            </button>
+            {/* <button onClick={this.createEvent}>
+              Create Event
+            </button> */}
         </div>
 
-        <Router>
+          <Router>
           <NavBar />
           <Switch>
             <Route exact path="/"><HomePage /></Route>
             <Route path="/about"><AboutPage/></Route>
             <Route path="/services"><ServicesPage /></Route>
-            <Route path="/scheduling"><SchedulingPage /></Route>
+            <Route path="/scheduling"><SchedulingPage createEvent={this.createEvent} /></Route>
           </Switch>
         </Router>
         
