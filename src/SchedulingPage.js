@@ -16,12 +16,18 @@ export default class SchedulingPage extends React.Component {
 
     render() {
         // const {user} = this.state;
-    
         const header = 'BOOK AN APPOINTMENT';
         const text = 'Mushrooms co-create prayerformance heartbeat of our ancestors juicy downward dog herbal medicine transformative lavender, harmony biomat. Crystalline astral plane gifting circle Big Sur chia seeds ceremonial-grade, toxins vitamin. Folk remedy positive affirmation light energy, ecofriendly bioneers white sage.';
+        function handleButtonClick() {
+            console.log('button clicked');
+        };
+
+
+
         return (
             <div>
                 <GoogleSignIn />
+                <button onClick={handleButtonClick()}>hiiiiiiiiiiiii</button>
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                     <center>
