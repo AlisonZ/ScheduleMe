@@ -4,12 +4,7 @@ import {Link} from 'react-router-dom';
 import './styles/NavBar.css';
 
 export default class NavBar extends React.Component {
-    state = {
-        user: null
-    }
-
     render() {
-        const {user} = this.state;
         return(
                 <ul className="navBar-list">
                     <Link to="/" className="navBar-listItem">Home</Link>
