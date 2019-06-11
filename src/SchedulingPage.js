@@ -19,7 +19,7 @@ export default class SchedulingPage extends React.Component {
         selected: '',
         signedIn: false,
         resource: {
-            "summary": "Appointment!!!!!!",
+            "summary": "Appointment!!!!!!????",
             "location": "Somewhere",
             "start": {
               "dateTime": "2019-06-16T10:00:00.000-07:00"
@@ -57,7 +57,7 @@ export default class SchedulingPage extends React.Component {
         gapi.load('client', start)
       }
 
-      insertEvents(){
+      insertEvents(resource){
         let that = this;
         function start() {
           gapi.client.init({
@@ -65,16 +65,7 @@ export default class SchedulingPage extends React.Component {
           }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
-                'resource': {
-                    "summary": "Appointment",
-                    "location": "Somewhere",
-                    "start": {
-                      "dateTime": "2019-06-16T10:00:00.000-07:00"
-                    },
-                    "end": {
-                      "dateTime": "2019-06-16T10:25:00.000-07:00"
-                    }
-                  }
+                'resource': resource
               })
           }).then( (response) => {  
             response.execute(function(resp) {
@@ -94,7 +85,6 @@ export default class SchedulingPage extends React.Component {
       }
 
       updateSignInStatus() {
-        // console.log('signed innnn!!!');
         this.setState({signedIn: !this.state.signedIn});
     }
 
@@ -107,6 +97,8 @@ export default class SchedulingPage extends React.Component {
 
 
     render() {
+        // console.log('statttt', this.state);
+
         const defaultOption = this.state.selected
         const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
 
@@ -139,7 +131,7 @@ export default class SchedulingPage extends React.Component {
                     <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /> :
                     null
                 }
-                <button onClick={this.insertEvents}>hiiiiiiiiiiiii</button>
+                <button onClick={this.insertEvents(this.state.resource)}>hiiiiiiiiiiiii</button>
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                     <center>
