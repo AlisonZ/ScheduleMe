@@ -15,6 +15,7 @@ export default class GoogleSignIn extends React.Component {
   }
   onSuccess(googleUser) {
     const profile = googleUser.getBasicProfile();
+    this.props.updateSignInStatus();
     console.log("Name: " + profile.getName());
   }
   render() {
