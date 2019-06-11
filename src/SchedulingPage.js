@@ -1,6 +1,7 @@
 /* global gapi */
 import React from 'react';
 import {Helmet} from 'react-helmet';
+import Dropdown from 'react-dropdown';
 
 import HeaderAndSmText from './HeaderAndSmText';
 import googleCalendar from './images/google-calendar.png';
@@ -15,6 +16,8 @@ export default class SchedulingPage extends React.Component {
    constructor(props) {
        super(props);
        this.state = {
+        selected: '',
+        signedIn: false,
         resource: {
             "summary": "Appointment",
             "location": "Somewhere",
@@ -28,6 +31,7 @@ export default class SchedulingPage extends React.Component {
        }
 
        this.getEvents = this.getEvents.bind(this);
+       this._onSelect = this._onSelect.bind(this);
    }
 
     getEvents(){
@@ -89,15 +93,39 @@ export default class SchedulingPage extends React.Component {
         gapi.load('client', start)
       }
 
+      updateSignInStatus() {
+        // console.log('signed innnn!!!');
+        this.setState({signedIn: !this.state.signedIn});
+    }
+
+    _onSelect (option) {
+        console.log('You selected ', option.label)
+        this.setState({selected: option})
+      }
+
+
 
 
     render() {
-        // const {user} = this.state;
+        const defaultOption = this.state.selected
+        const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
+
         const header = 'BOOK AN APPOINTMENT';
         const text = 'Mushrooms co-create prayerformance heartbeat of our ancestors juicy downward dog herbal medicine transformative lavender, harmony biomat. Crystalline astral plane gifting circle Big Sur chia seeds ceremonial-grade, toxins vitamin. Folk remedy positive affirmation light energy, ecofriendly bioneers white sage.';
-        function handleButtonClick() {
-            console.log('button clicked');
-        };
+
+
+          // TODO: These times should be returned from an API call based on the day selected
+        // until that functionality is available, these times are hard-coded
+        const options = [
+            {value: '9-10am', label:'9am - 10am'},
+            {value: '10-11am', label:'10am - 11am'},
+            {value: '11-12pm', label:'11am - 12pm'},
+            {value: '12-1pm', label:'12pm - 1pm'},
+            {value: '1-2pm', label:'1pm - 2pm'},
+            {value: '2-3pm', label:'2pm - 3pm'},
+            {value: '3-4pm', label:'3pm - 4pm'},
+            {value: '4-5pm', label:'4pm - 5pm'},
+        ];
 
 
 
@@ -106,7 +134,11 @@ export default class SchedulingPage extends React.Component {
                 <Helmet>    
                     <script src="https://apis.google.com/js/platform.js" async defer></script>
                 </Helmet>
-                <GoogleSignIn />
+                <GoogleSignIn updateSignInStatus={this.updateSignInStatus.bind(this)}/>
+                {this.state.signedIn ?
+                    <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /> :
+                    null
+                }
                 <button onClick={this.insertEvents}>hiiiiiiiiiiiii</button>
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
