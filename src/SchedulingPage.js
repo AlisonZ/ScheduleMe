@@ -97,7 +97,7 @@ export default class SchedulingPage extends React.Component {
 
 
     render() {
-        // console.log('statttt', this.state);
+        console.log('statttt', typeof this.state.selected.value);
 
         const defaultOption = this.state.selected
         const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
@@ -131,12 +131,12 @@ export default class SchedulingPage extends React.Component {
                     <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /> :
                     null
                 }
-                <button onClick={this.insertEvents(this.state.resource)}>hiiiiiiiiiiiii</button>
+                <button onClick={this.insertEvents(this.state.resource)} disabled={!this.state.selected.value}>Book a slot today</button>
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                     <center>
                         <img
-                            src={googleCalendar}
+                            src={googleCalendar}s
                             alt="google-calendar-image"
                             className="schedulingPage-image"
                         />
