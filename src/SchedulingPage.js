@@ -19,7 +19,7 @@ export default class SchedulingPage extends React.Component {
         selected: '',
         signedIn: false,
         resource: {
-            "summary": "Appointment",
+            "summary": "Appointment!!!!!!",
             "location": "Somewhere",
             "start": {
               "dateTime": "2019-06-16T10:00:00.000-07:00"
