@@ -22,10 +22,10 @@ export default class SchedulingPage extends React.Component {
             "summary": "Appointment!!!!!!????",
             "location": "Somewhere",
             "start": {
-              "dateTime": "2019-06-16T10:00:00.000-07:00"
+              "dateTime": "2019-06-16T13:00:00.000-07:00"
             },
             "end": {
-              "dateTime": "2019-06-16T10:25:00.000-07:00"
+              "dateTime": "2019-06-16T14:25:00.000-07:00"
             }
           },
        }
@@ -57,7 +57,18 @@ export default class SchedulingPage extends React.Component {
         gapi.load('client', start)
       }
 
-      insertEvents(resource){
+    insertEvents(state){
+    console.log('insert events state', state);
+
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    tomorrow.toISOString();
+
+    console.log('insert events tomorrow', tomorrow);
+
+
+
+
         let that = this;
         function start() {
           gapi.client.init({
@@ -65,7 +76,7 @@ export default class SchedulingPage extends React.Component {
           }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
-                'resource': resource
+                'resource': state.resource
               })
           }).then( (response) => {  
             response.execute(function(resp) {
@@ -97,7 +108,7 @@ export default class SchedulingPage extends React.Component {
 
 
     render() {
-        console.log('statttt', typeof this.state.selected.value);
+        // console.log('statttt', typeof this.state.selected.value);
 
         const defaultOption = this.state.selected
         const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
@@ -109,7 +120,7 @@ export default class SchedulingPage extends React.Component {
           // TODO: These times should be returned from an API call based on the day selected
         // until that functionality is available, these times are hard-coded
         const options = [
-            {value: '9-10am', label:'9am - 10am'},
+            {value: '9-10am', label:'9am - 10am!!!'},
             {value: '10-11am', label:'10am - 11am'},
             {value: '11-12pm', label:'11am - 12pm'},
             {value: '12-1pm', label:'12pm - 1pm'},
@@ -131,7 +142,7 @@ export default class SchedulingPage extends React.Component {
                     <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /> :
                     null
                 }
-                <button onClick={this.insertEvents(this.state.resource)} disabled={!this.state.selected.value}>Book a slot today</button>
+                <button onClick={this.insertEvents(this.state)} disabled={!this.state.selected.value}>Book a slot today</button>
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                     <center>
