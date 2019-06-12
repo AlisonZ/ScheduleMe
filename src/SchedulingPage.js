@@ -18,17 +18,21 @@ export default class SchedulingPage extends React.Component {
        super(props);
        this.state = {   
         selected: null,
+        selectedTreatment: '',
         signedIn: false,
         startTime: "",
         endTime: "",
         eventTitle: "",
+        value: "",
        }
 
        this.getEvents = this.getEvents.bind(this);
        this._onSelect = this._onSelect.bind(this);
+       this._onSelectTreatments = this._onSelectTreatments.bind(this);
        this.convertInputTime = this.convertInputTime.bind(this);
        this.insertEvents = this.insertEvents.bind(this);
-       this.buttonClick = this.buttonClick.bind(this);
+       this.handleInputChange = this.handleInputChange.bind(this);
+       this.handleSubmit = this.handleSubmit.bind(this);
    }
 
     getEvents(){
@@ -64,7 +68,7 @@ export default class SchedulingPage extends React.Component {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'alisonkzerbe@gmail.com',
                 'resource': {
-                    "summary": "SCHEDULLLLLE",
+                    "summary": state.selectedTreatment.value,
                     "location": "Somewhere",
                     "start": {
                       "dateTime": state.startTime,
@@ -93,6 +97,7 @@ export default class SchedulingPage extends React.Component {
 
     convertInputTime() {    
         //TODO: get working with a library like moment instead of this hard-coding here
+        //TODO: pull this into a helper method in a /common file
         const timeMaps = {
             "9am" : "T09:00:00.000-07:00",
             "10am": "T10:00:00.000-07:00",
@@ -124,11 +129,18 @@ export default class SchedulingPage extends React.Component {
         this.convertInputTime(); 
       }
 
+      _onSelectTreatments (treatment) {
+        console.log('You selected ', treatment.label)
+        this.setState({selectedTreatment: treatment}) 
+      }
 
+      handleInputChange(event) {
+        this.setState({value: event.target.value});
+      }
 
-      
-      buttonClick() {
-          console.log('button has been clicked');
+      handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value);
+        event.preventDefault();
       }
 
     render() {
@@ -152,7 +164,13 @@ export default class SchedulingPage extends React.Component {
             {value: '4-5pm', label:'4pm - 5pm'},
         ];
 
-
+        const treatments = [
+            {value: 'Massage', label:'Massage'},
+            {value: 'Acupuncture', label:'Acupuncture'},
+            {value: 'Healing Gems', label:'Healing Gems'},
+            {value: 'Tarot Reading', label:'Tarot Reading'},
+            {value: 'Ouija', label:'Ouija'},
+        ];
 
         return (
             <div>
@@ -160,9 +178,12 @@ export default class SchedulingPage extends React.Component {
                     <script src="https://apis.google.com/js/platform.js" async defer></script>
                 </Helmet>
                 <GoogleSignIn updateSignInStatus={this.updateSignInStatus.bind(this)}/>
-                {this.state.signedIn ?
-                    <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /> :
-                    null
+                {this.state.signedIn ? (
+                    <div>
+                        <Dropdown options   ={treatments} onChange={this._onSelectTreatments} value={defaultOption} placeholder="Select a treatment" />                       
+                        <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+                    </div>
+                ) : null
                 }
                 <button onClick={() => this.insertEvents(this.state)} disabled={!this.state.selected}>Book a slot today</button>
 
