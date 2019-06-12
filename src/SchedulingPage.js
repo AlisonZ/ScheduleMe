@@ -2,6 +2,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import Dropdown from 'react-dropdown';
+import moment from 'moment-timezone';
 
 import HeaderAndSmText from './HeaderAndSmText';
 import googleCalendar from './images/google-calendar.png';
@@ -15,23 +16,30 @@ import './App.css';
 export default class SchedulingPage extends React.Component {
    constructor(props) {
        super(props);
-       this.state = {
-        selected: '',
+       this.state = {   
+        selected: null,
         signedIn: false,
-        resource: {
-            "summary": "Appointment!!!!!!????",
-            "location": "Somewhere",
-            "start": {
-              "dateTime": "2019-06-16T13:00:00.000-07:00"
-            },
-            "end": {
-              "dateTime": "2019-06-16T14:25:00.000-07:00"
-            }
-          },
+        // startDate: "2019-06-16",
+        startTime: "",
+        // endDate: "2019-06-16",
+        endTime: "",
+        // resource: {
+        //     "summary": "Appointment!!!!!!????",
+        //     "location": "Somewhere",
+        //     "start": {
+        //       "dateTime": "2019-06-16T13:00:00.000-07:00"
+        //     },
+        //     "end": {
+        //       "dateTime": "2019-06-16T14:25:00.000-07:00"
+        //     }
+        //   },
        }
 
        this.getEvents = this.getEvents.bind(this);
        this._onSelect = this._onSelect.bind(this);
+       this.convertInputTime = this.convertInputTime.bind(this);
+       this.insertEvents = this.insertEvents.bind(this);
+       this.buttonClick = this.buttonClick.bind(this);
    }
 
     getEvents(){
@@ -48,10 +56,10 @@ export default class SchedulingPage extends React.Component {
             that.setState({
               events
             }, ()=>{
-              console.log(that.state.events);
+            //   console.log(that.state.events);
             })
           }, function(reason) {
-            console.log(reason);
+            // console.log(reason);
           });
         }
         gapi.load('client', start)
@@ -59,16 +67,6 @@ export default class SchedulingPage extends React.Component {
 
     insertEvents(state){
     console.log('insert events state', state);
-
-    var tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate()+1);
-    tomorrow.toISOString();
-
-    console.log('insert events tomorrow', tomorrow);
-
-
-
-
         let that = this;
         function start() {
           gapi.client.init({
@@ -76,11 +74,22 @@ export default class SchedulingPage extends React.Component {
           }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'alisonkzerbe@gmail.com',
-                'resource': state.resource
+                'resource': {
+                    "summary": "SCHEDULLLLLE",
+                    "location": "Somewhere",
+                    "start": {
+                      "dateTime": state.startTime,
+                      "timeZone": "America/Los_Angeles",
+                    },
+                    "end": {
+                      "dateTime": state.endTime,
+                      timeZone: "America/Los_Angeles",
+                    }
+                  }
               })
           }).then( (response) => {  
             response.execute(function(resp) {
-                console.log(resp);
+                // console.log(resp);
               })
             // let events = response.result.items
             // that.setState({
@@ -89,7 +98,7 @@ export default class SchedulingPage extends React.Component {
             //   console.log(that.state.events);
             // })
           }, function(reason) {
-            console.log(reason);
+            // console.log(reason);
           });
         }
         gapi.load('client', start)
@@ -99,19 +108,54 @@ export default class SchedulingPage extends React.Component {
         this.setState({signedIn: !this.state.signedIn});
     }
 
+    convertInputTime() {    
+        //TODO: get working with a library like moment instead of this hard-coding here
+        const timeMaps = {
+            "9am" : "T09:00:00.000-07:00",
+            "10am": "T10:00:00.000-07:00",
+            "11am": "T11:00:00.000-07:00",
+            "12pm": "T12:00:00.000-07:00",
+            "1pm": "T13:00:00.000-07:00",
+            "2pm": "T14:00:00.000-07:00",
+            "3pm": "T15:00:00.000-07:00",
+            "4pm": "T16:00:00.000-07:00",
+            "5pm": "T17:00:00.000-07:00",
+        }
+
+        const selectedTimes = this.state.selected.label.split(" ");
+        const startHour = timeMaps[selectedTimes[0]];
+        const endHour = timeMaps[selectedTimes[2]];
+        const startingTime = moment.tz(`2019-06-19${startHour}`, "America/Los_Angeles");
+        // console.log('starting time', startingTime);
+        const endingTime = moment.tz(`2019-06-19${endHour}`, "America/Los_Angeles");
+    
+        this.setState({
+            startTime: startingTime._i,
+            endTime: endingTime._i,
+        }); 
+    }
+
+
     _onSelect (option) {
         console.log('You selected ', option.label)
-        this.setState({selected: option})
+        this.setState({selected: option})    
+        this.convertInputTime(); 
+        
+        
+        // console.log('formmmmm', startTime.format());
+        // this.setState({resource.start.dateTime: startTime});
       }
 
 
 
+      
+      buttonClick() {
+          console.log('button has been clicked');
+      }
 
     render() {
-        // console.log('statttt', typeof this.state.selected.value);
-
         const defaultOption = this.state.selected
-        const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
+        // const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
 
         const header = 'BOOK AN APPOINTMENT';
         const text = 'Mushrooms co-create prayerformance heartbeat of our ancestors juicy downward dog herbal medicine transformative lavender, harmony biomat. Crystalline astral plane gifting circle Big Sur chia seeds ceremonial-grade, toxins vitamin. Folk remedy positive affirmation light energy, ecofriendly bioneers white sage.';
@@ -120,7 +164,7 @@ export default class SchedulingPage extends React.Component {
           // TODO: These times should be returned from an API call based on the day selected
         // until that functionality is available, these times are hard-coded
         const options = [
-            {value: '9-10am', label:'9am - 10am!!!'},
+            {value: '9-10am', label:'9am - 10am'},
             {value: '10-11am', label:'10am - 11am'},
             {value: '11-12pm', label:'11am - 12pm'},
             {value: '12-1pm', label:'12pm - 1pm'},
@@ -142,7 +186,9 @@ export default class SchedulingPage extends React.Component {
                     <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /> :
                     null
                 }
-                <button onClick={this.insertEvents(this.state)} disabled={!this.state.selected.value}>Book a slot today</button>
+                <button onClick={() => this.insertEvents(this.state)} disabled={!this.state.selected}>Book a slot today</button>
+                {/* <button onClick={() => this.buttonClick()} disabled={!this.state.selected}>Book a slot today</button> */}
+
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
                     <center>
@@ -150,7 +196,7 @@ export default class SchedulingPage extends React.Component {
                             src={googleCalendar}s
                             alt="google-calendar-image"
                             className="schedulingPage-image"
-                        />
+                        />  
                     </center>
                 </div>
             </div>
