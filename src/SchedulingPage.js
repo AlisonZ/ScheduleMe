@@ -183,7 +183,7 @@ export default class SchedulingPage extends React.Component {
                 {this.state.signedIn ? (
                     <div>
                         <Dropdown options={treatments} onChange={this._onSelectTreatments} value={defaultTreatmentOption} placeholder="Select a treatment" />                       
-                        <Dropdown options={options} onChange={this._onSelect} value={defaultTimeOption} placeholder="Select an option" />
+                        <Dropdown options={options} onChange={this._onSelect} value={defaultTimeOption} placeholder="Select an time" />
                     </div>
                 ) : null
                 }

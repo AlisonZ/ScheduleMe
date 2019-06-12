@@ -22,13 +22,6 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <body>
       <div id="root"></div>
-  
-      <!--Add buttons to initiate auth sequence and sign out-->
-      <button id="authorize_button" style="display: none;">Authorize</button>
-      <button id="signout_button" style="display: none;">Sign Out</button>
-  
-      <pre id="content" style="white-space: pre-wrap;"></pre>
-  
       <script type="text/javascript">
         // Client ID and API key from the Developer Console
         var CLIENT_ID = '415585169793-csd5jepc693i19l4pj2scj7jc7dcdrlt.apps.googleusercontent.com';
@@ -102,65 +95,6 @@
         function handleSignoutClick(event) {
           gapi.auth2.getAuthInstance().signOut();
         }
-
-        var event = {
-          'summary': 'Google I/O 2015',
-          'location': '800 Howard St., San Francisco, CA 94103',
-          'description': 'A chance to hear more about Google\'s developer products.',
-          'start': {
-            'dateTime': '2019-06-28T09:00:00-07:00',
-            'timeZone': 'America/Los_Angeles'
-          },
-          'end': {
-            'dateTime': '2019-06-28T17:00:00-07:00',
-            'timeZone': 'America/Los_Angeles'
-          },
-          'recurrence': [
-            'RRULE:FREQ=DAILY;COUNT=2'
-          ],
-          'attendees': [
-            {'email': 'lpage@example.com'},
-            {'email': 'sbrin@example.com'}
-          ],
-          'reminders': {
-            'useDefault': false,
-            'overrides': [
-              {'method': 'email', 'minutes': 24 * 60},
-              {'method': 'popup', 'minutes': 10}
-            ]
-          }
-        };
-
-  
-        /**
-         * Append a pre element to the body containing the given message
-         * as its text node. Used to display the results of the API call.
-         *
-         * @param {string} message Text to be placed in pre element.
-         */
-        function appendPre(message) {
-          var pre = document.getElementById('content');
-          var textContent = document.createTextNode(message + '\n');
-          pre.appendChild(textContent);
-        }
-  
-        /**
-         * Print the summary and start datetime/date of the next ten events in
-         * the authorized user's calendar. If no events are found an
-         * appropriate message is printed.
-         */
-        function listUpcomingEvents() {
-          // console.log('in listtttt');
-          var request = gapi.client.calendar.events.insert({
-            'calendarId': 'primary',
-            'resource': event
-          });
-          
-          request.execute(function(event) {
-            appendPre('Event created: ' + event.htmlLink);
-          });
-        }
-  
       </script>
   
       <script async defer src="https://apis.google.com/js/api.js"
