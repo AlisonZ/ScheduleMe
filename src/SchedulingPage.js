@@ -19,20 +19,9 @@ export default class SchedulingPage extends React.Component {
        this.state = {   
         selected: null,
         signedIn: false,
-        // startDate: "2019-06-16",
         startTime: "",
-        // endDate: "2019-06-16",
         endTime: "",
-        // resource: {
-        //     "summary": "Appointment!!!!!!????",
-        //     "location": "Somewhere",
-        //     "start": {
-        //       "dateTime": "2019-06-16T13:00:00.000-07:00"
-        //     },
-        //     "end": {
-        //       "dateTime": "2019-06-16T14:25:00.000-07:00"
-        //     }
-        //   },
+        eventTitle: "",
        }
 
        this.getEvents = this.getEvents.bind(this);
@@ -89,16 +78,10 @@ export default class SchedulingPage extends React.Component {
               })
           }).then( (response) => {  
             response.execute(function(resp) {
-                // console.log(resp);
+                console.log(resp);
               })
-            // let events = response.result.items
-            // that.setState({
-            //   events
-            // }, ()=>{
-            //   console.log(that.state.events);
-            // })
           }, function(reason) {
-            // console.log(reason);
+            console.log(reason);
           });
         }
         gapi.load('client', start)
@@ -126,7 +109,6 @@ export default class SchedulingPage extends React.Component {
         const startHour = timeMaps[selectedTimes[0]];
         const endHour = timeMaps[selectedTimes[2]];
         const startingTime = moment.tz(`2019-06-19${startHour}`, "America/Los_Angeles");
-        // console.log('starting time', startingTime);
         const endingTime = moment.tz(`2019-06-19${endHour}`, "America/Los_Angeles");
     
         this.setState({
@@ -140,10 +122,6 @@ export default class SchedulingPage extends React.Component {
         console.log('You selected ', option.label)
         this.setState({selected: option})    
         this.convertInputTime(); 
-        
-        
-        // console.log('formmmmm', startTime.format());
-        // this.setState({resource.start.dateTime: startTime});
       }
 
 
@@ -187,7 +165,6 @@ export default class SchedulingPage extends React.Component {
                     null
                 }
                 <button onClick={() => this.insertEvents(this.state)} disabled={!this.state.selected}>Book a slot today</button>
-                {/* <button onClick={() => this.buttonClick()} disabled={!this.state.selected}>Book a slot today</button> */}
 
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
