@@ -144,7 +144,9 @@ export default class SchedulingPage extends React.Component {
       }
 
     render() {
-        const defaultOption = this.state.selected
+        const defaultTimeOption = this.state.selected;
+        const defaultTreatmentOption = this.state.selectedTreatment;
+    
         // const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
 
         const header = 'BOOK AN APPOINTMENT';
@@ -180,8 +182,8 @@ export default class SchedulingPage extends React.Component {
                 <GoogleSignIn updateSignInStatus={this.updateSignInStatus.bind(this)}/>
                 {this.state.signedIn ? (
                     <div>
-                        <Dropdown options   ={treatments} onChange={this._onSelectTreatments} value={defaultOption} placeholder="Select a treatment" />                       
-                        <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+                        <Dropdown options={treatments} onChange={this._onSelectTreatments} value={defaultTreatmentOption} placeholder="Select a treatment" />                       
+                        <Dropdown options={options} onChange={this._onSelect} value={defaultTimeOption} placeholder="Select an option" />
                     </div>
                 ) : null
                 }
