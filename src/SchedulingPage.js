@@ -75,7 +75,7 @@ export default class SchedulingPage extends React.Component {
             'apiKey': GOOGLE_API_KEY
           }).then(function() {
             return gapi.client.calendar.events.insert({
-                'calendarId': 'primary',
+                'calendarId': 'alisonkzerbe@gmail.com',
                 'resource': state.resource
               })
           }).then( (response) => {  
