@@ -81,9 +81,9 @@ export default class SchedulingPage extends React.Component {
                   }
               })
           }).then( (response) => {  
-            response.execute(function(resp) {
-                console.log(resp);
-              })
+            // response.execute(function(resp) {
+                console.log('scheduled!!!!!', response);
+            //   })
           }, function(reason) {
             console.log(reason);
           });
