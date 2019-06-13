@@ -3,6 +3,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import Dropdown from 'react-dropdown';
 import moment from 'moment-timezone';
+import Notifications, {notify} from 'react-notify-toast';
 
 import HeaderAndSmText from './HeaderAndSmText';
 import googleCalendar from './images/google-calendar.png';
@@ -59,8 +60,10 @@ export default class SchedulingPage extends React.Component {
         gapi.load('client', start)
       }
 
-    insertEvents(state){
-    console.log('insert events state', state);
+      
+      insertEvents(state){
+        const successToastColor = { background: 'f7f982', text: '#0c574c'};
+        const failureToastColor = { background: '#f98282', text: '#0c574c'};
         let that = this;
         function start() {
           gapi.client.init({
@@ -82,11 +85,11 @@ export default class SchedulingPage extends React.Component {
                   }
               })
           }).then( (response) => {  
-            // response.execute(function(resp) {
-                console.log('scheduled!!!!!', response);
-            //   })
+                notify.show(`Yay!! You're booked for a ${state.selectedTreatment.value}`, 'success', 5000, successToastColor);
           }, function(reason) {
             console.log(reason);
+            notify.show(`Oh no! There was a problem booking you. Try again please!`, 'error', 5000, failureToastColor);
+
           });
         }
         gapi.load('client', start)
@@ -180,6 +183,7 @@ export default class SchedulingPage extends React.Component {
                 <Helmet>    
                     <script src="https://apis.google.com/js/platform.js" async defer></script>
                 </Helmet>
+                <Notifications />
                 <GoogleSignIn updateSignInStatus={this.updateSignInStatus.bind(this)}/>
                 {this.state.signedIn ? (
                     <div>

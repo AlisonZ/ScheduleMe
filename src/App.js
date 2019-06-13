@@ -7,6 +7,7 @@ import ServicesPage from './ServicesPage';
 import SchedulingPage from './SchedulingPage';
 import NavBar from './NavBar';
 
+
 export default class App extends React.Component {
   render() {
     return (
@@ -16,7 +17,7 @@ export default class App extends React.Component {
             <Route exact path="/"><HomePage /></Route>
             <Route path="/about"><AboutPage/></Route>
             <Route path="/services"><ServicesPage /></Route>
-            <Route path="/scheduling"><SchedulingPage createEvent={this.createEvent} /></Route>
+            <Route path="/scheduling"><SchedulingPage createEvent={this.createEvent}/></Route>
           </Switch>
         </Router>        
     );
