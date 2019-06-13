@@ -6,6 +6,7 @@ import moment from 'moment-timezone';
 
 import HeaderAndSmText from './HeaderAndSmText';
 import googleCalendar from './images/google-calendar.png';
+import dropDownArrow from './images/drop-down-arrow.png'
 import GoogleSignIn from './GoogleSignIn';
 import { CALENDAR_ID, GOOGLE_API_KEY } from "./config.js";
 
@@ -185,9 +186,12 @@ export default class SchedulingPage extends React.Component {
                         <Dropdown options={treatments} onChange={this._onSelectTreatments} value={defaultTreatmentOption} placeholder="Select a treatment" />                       
                         <Dropdown options={options} onChange={this._onSelect} value={defaultTimeOption} placeholder="Select an time" />
                     </div>
-                ) : null
+                    ) : null
                 }
-                <button onClick={() => this.insertEvents(this.state)} disabled={!this.state.selected}>Book a slot today</button>
+                { this.state.selected ? (
+                    <button onClick={() => this.insertEvents(this.state)} disabled={!this.state.selected} className="bookNow-button">Book Now!</button>
+                    ) : null
+                }
 
                 <div className="header-sm-text-desc">
                     <HeaderAndSmText header={header} text={text} />
